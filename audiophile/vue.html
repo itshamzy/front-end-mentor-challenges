@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        this will be replaced
+        
+    </div>
+    <script>
+    console.log('hello, whatsup');
+    </script>
+    <script src="vue.js"></script>
+    <script  >
+        var element=document.getElementById('app');
+    var app=new Vue({
+        
+        el:element,
+        data:{
+            books:[
+                {
+                    title: 'entertaining kids',
+                    price: 5.89,
+                    id:0,
+                    genres:['kid','story'],
+                    action: function(){return 'i performed an action'}
+                }
+            ],
+            yes:'yes value',
+            no: 'no value',
+            falseValue:false,
+            myname:'cool name',
+            someHtml:'<h1 style="color:blue; background: red">this is a raw html</h1>',
+            yes: true,
+            no: false,
+            maybe: 0,
+            show: 'yes',
+            dontShow: 'no',
+            yesWord: 'yes',
+           
+        },
+        template:`
+<div>
+<ul>
+<li v-for="book in books" :key="book.id">
+<p><strong>Id:</strong>{{book.id}}</p>
+<p><strong>price:</strong>{{book.price}}</p>
+<p>
+<strong>genre:</strong><span v-for="(genre,index) in book.genres">{{genre}}<span v-if="index < book.genres.length-1">,</span>
+</span></p>
+<p><strong>action:</strong>{{book.action()}}</p>
+</li>
+</ul>
+</div>
+<div>
+    {{teenFilter()}}
+</div>
+`,
+methods:{
+    teenFilter:function(){
+        this.books=this.books.filter(book=>{
+            return(book.genres.findIndex(genre=>{return genre==='teen'})>0
+            );//end return
+        });//end filter
+    }//end teenfilter
+}
+    });
+  
+    </script>
+
+</body>
+</html>
